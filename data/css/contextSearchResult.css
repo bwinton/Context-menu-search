@@ -1,0 +1,149 @@
+body {
+    font: 12px/14px Lucida Grande;
+    color: #333;
+    margin: 0;
+    line-height: 20px;
+}
+html, body, div,  a, img, ol, ul, li, table, tbody, tfoot, thead, tr, th, td, footer, header,p
+{
+    border: 0;
+    margin: 0;
+    padding: 0;
+
+}
+
+
+#nav-tab {
+
+    line-height: 20px;
+}
+
+#nav-tab li {
+    float: left;
+    height: 38px;
+    margin: 0 0 15px;
+    width: 33.33%;
+    list-style: outside none none;
+}
+
+#nav-tab li a {
+    background-color: #FBFBFB;
+    color: #424F5A;
+    padding: 10px 0;
+    width: 100%;
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid #C1C1C1;
+
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 50ms ease 0s;
+    background: transparent none repeat scroll 0 0;
+}
+
+#nav-tab li.active a {
+
+    box-shadow: 0 3px 0 0 #0095DD inset;
+}
+
+.tab-pane {
+    display: none;
+    /*position: relative;*/
+
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+
+#nav-tab li.separator a {
+    border-left: 1px solid #C1C1C1;
+    border-right: 1px solid #C1C1C1;
+}
+
+#shop-list {
+    width:99%;
+}
+
+
+#shop-list tbody .item-image {
+    width: 30%;
+    padding: 4px;
+    text-align: center;
+}
+
+#shop-list tbody .item-image img{
+    height: 50px;
+    width: 50px;
+}
+
+#shop-list a
+{
+    border-bottom: 1px dotted #6380bc;
+    color: #6380bc;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#shop-list a:hover
+{
+    border-bottom-style: solid;
+}
+
+#tab-content{
+    padding: 6px 20px;
+    height:204px;
+    overflow: hidden;
+    position: relative;
+}
+
+/*#tab-content:after {*/
+
+    /*bottom:-20px;*/
+    /*content: "More";*/
+    /*font-weight: bold;*/
+    /*padding: 0 20px 1px 45px;*/
+    /*position: absolute;*/
+    /*right: 0;*/
+
+/*}*/
+
+a.more {
+    font-weight: bold;
+    text-decoration:none;
+    color:#6380bc;
+    position: relative;
+    right: 8px;
+}
+
+.action {
+    text-align:right;
+}
+
+.arrow-circle {
+
+    display: inline-block;
+    height: 16px;width: 16px;
+    border-radius: 8px;
+    text-align: center;
+    padding: 0;
+    -moz-border-radius: 8px;
+    background-color: #c1c1c1;
+   position: absolute;
+    top: 0px;
+
+}
+
+.arrow{
+    font-weight:bold;
+    font-size:24px;
+    position: absolute;
+    top: -2px;
+    right: -13px;
+}
+
+.content{
+    height: 185px;
+overflow: hidden;
+}

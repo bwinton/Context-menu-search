@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <link href="./css/contextSearchResult.css?v=ReplaceCssVersion" rel="stylesheet" type="text/css"/>
+    <script src="./js/jquery.min.js" type="text/javascript"></script>
+    <script src="./js/contextSearchResult.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div style=""><!-- Remove the style-only for testing -->
+    <!-- Tabs -->
+    <div>
+    <ul id="nav-tab" >
+        <li class="active"><a href="#definition">Definition</a></li>
+        <li class="separator"><a href="#wiki">Wikipedia</a></li>
+
+        <li><a href="#shop">Shop</a></li>
+    </ul>
+
+    </div> <br />
+    <!-- Tab panes -->
+    <div id="tab-content">
+        <div class="tab-pane active" id="definition">
+            <div class="content">
+                <div id="selectionType" style="font-weight: bold"></div>
+                <ol id="meaningList" style="margin-left:15px;">
+
+                </ol>
+            </div>
+            <div class="action"><a class="more" href="" target="_blank">More<span class="arrow-circle"> &nbsp;</span>
+                <span class="arrow">&#10147;</span></a></div>
+        </div>
+        <div class="tab-pane" id="wiki">
+            <div class="content"></div>
+            <div class="action"><a class="more" href="" target="_blank">More<span class="arrow-circle"> &nbsp;</span>
+                <span class="arrow">&#10147;</span></a></div>
+        </div>
+        <div class="tab-pane" id="shop">
+            <div class="content" style="overflow: scroll">
+                <table id="shop-list">
+                    <tbody></tbody>
+                    <tfoot style="display:none">
+                    <tr>
+                        <td class="item-image"><img src="" alt="" />
+
+                            <div style="text-align:center"> $&nbsp;<span class="price"></span></div>
+                        </td>
+                        <td class="item-description"><a class="title"></a></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="action"><a class="more" href="" target="_blank">More<span class="arrow-circle"> &nbsp;</span>
+                <span class="arrow">&#10147;</span></a></div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+</body>
+</html>
+
+
