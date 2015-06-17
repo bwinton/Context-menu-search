@@ -1,10 +1,7 @@
 $(function () {
-    var text = "school";
-   addon.port.on("showt", function (text)
+    addon.port.on("showt", function (text)
     {
-        console.log(text + "asdasd");
 
-        console.log("Ajax");
         // get info from wiki for selection text
         getContent("http://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=" + text + "&format=json&exintro=1",
             function (data) {
@@ -28,11 +25,29 @@ $(function () {
                 $xml = $(definitionXml),
                 $title = $xml.find("ew");
             $("#selectionType").text($xml.find("fl").eq(0).text());
-            var meaningCount = $xml.find("def").find("sn").length;
+            var $serialNumber = $xml.find("def").find("sn");
+            var meaningCount = $serialNumber.length;
             var $defList = $xml.find("def").find("dt");
             var $listItems = $();
+
             for (var i = 0; i < meaningCount; i++) {
-                $listItems = $listItems.add($("<li>").text($defList.eq(i).text()));
+
+                if (isNaN($serialNumber.eq(i).text().charAt(0)) == false) {
+                    $listItems = $listItems.add($("<li>",{"style":" margin-left:5px"}).text($defList.eq(i).text()))
+                }
+                else {
+                    var lastChild = $listItems[$listItems.length - 1];
+                    if (lastChild) {
+                        lastChild = $(lastChild);
+                        if (lastChild.children().length == 0) {
+                            lastChild.append($("<ul>",{"style":" list-style: outside none none"}).append($("<li>",{"style":" list-style: outside none none"}).text($defList.eq(i).text())));
+                        }
+                        else {
+                            lastChild.find("ul").append($("<li>",{"style":" list-style: outside none none"}).text($defList.eq(i).text()));
+                        }
+                    }
+                }
+                //  $listItems = $listItems.add($("<li>").text($defList.eq(i).text()));
             }
             $("#meaningList").append($listItems);
             $("#definition").find(".more").attr("href", "http://www.merriam-webster.com/dictionary/" + text);
@@ -96,7 +111,7 @@ function getContent(url, callbackSuccess, callbackError) {
         processData: true,
         success: callbackSuccess,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("error");
+            console.log("error");
         }
     });
 }
