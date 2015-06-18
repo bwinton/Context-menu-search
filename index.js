@@ -18,7 +18,7 @@ cm.Item({
  context: cm.SelectionContext(),
  contentScript: 'self.on("context", function () {\
 	var text = window.getSelection().toString();\
-	return "What is " + text + "?"; \
+	return "What is "+ text + "?"; \
 }); \
 self.on("click", function (node, data) { \
   self.postMessage(window.getSelection().toString());\
@@ -49,8 +49,9 @@ contentURL: data.url("context-search-results.html")
 	searchResultPanel.on("show", function() {
   searchResultPanel.port.emit("showt", selectedText);
 });
+var conextMenuPosition = contextMenu.getBoundingClientRect();
 searchResultPanel.show({
-	position: {top:400, right:400}
+	position: {top:conextMenuPosition.top-75, left:conextMenuPosition.left}
 });
 }
 

@@ -1,8 +1,8 @@
 {
-  "title": "ContextMenuText",
-  "name": "context-menu-test",
+  "title": "Context Search",
+  "name": "context-menu-search",
   "version": "0.0.1",
-  "description": "To check how context-menu works in jpm",
+  "description": "",
   "main": "index.js",
   "author": "Jatin Chhikara",
   "engines": {

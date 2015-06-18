@@ -115,32 +115,18 @@ a.more {
     color:#6380bc;
     position: relative;
     right: 8px;
+    padding: 3px;
 }
 
 .action {
     text-align:right;
 }
 
-.arrow-circle {
+.arrow {
+    position:absolute;
+    top: 3px;
+    margin-left: 2px;
 
-    display: inline-block;
-    height: 16px;width: 16px;
-    border-radius: 8px;
-    text-align: center;
-    padding: 0;
-    -moz-border-radius: 8px;
-    background-color: #c1c1c1;
-   position: absolute;
-    top: 0px;
-
-}
-
-.arrow{
-    font-weight:bold;
-    font-size:24px;
-    position: absolute;
-    top: -2px;
-    right: -13px;
 }
 
 .content{

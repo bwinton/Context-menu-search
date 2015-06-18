@@ -3,7 +3,7 @@ $(function () {
     {
 
         // get info from wiki for selection text
-        getContent("http://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=" + text + "&format=json&exintro=1",
+        getContent("http://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=" + text + "&format=json&exintro=1&redirects=",
             function (data) {
                 var resultData = data.query.pages, firstPage;
                 $.each(resultData, function (i, item) {
