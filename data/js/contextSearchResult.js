@@ -50,7 +50,12 @@ $(function () {
                 //  $listItems = $listItems.add($("<li>").text($defList.eq(i).text()));
             }
             $("#meaningList").append($listItems);
-            $("#definition").find(".more").attr("href", "http://www.merriam-webster.com/dictionary/" + text);
+            $("#definition").find(".more").on("click",() => {
+                addon.port.emit("hideP", true);
+            //add animation for the box
+          //  setTimeout(function(){ window.open("http://www.merriam-webster.com/dictionary/" + text, "_blank");}, 6000);
+
+            });
             // truncateText($("#tab-content"), $("#definition"));
         });
 
@@ -83,7 +88,7 @@ $(function () {
                     }
                 }
 
-                $("#shop-list").find("tbody").append($list);
+                $("#shop-list").find("tbody").empty().append($list);
                 $("#shop").find(".more").attr("href",
                     "http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR10.TRC0.A0.H0.X" + text + ".TRS0&_nkw=" + text + "&_sacat=0");
                 // truncateText($("#tab-content"), $("#shop"));

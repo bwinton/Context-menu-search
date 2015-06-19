@@ -32,23 +32,37 @@ onMessage: function (selectedText) {
 
 
 
+function panelHide (){
+this.show();
+
+}
+
+const XUL_NS = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
+var dotsIcon =  browserDocument.createElementNS(XUL_NS,"image");
+dotsIcon.setAttributeNS(XUL_NS,"src","./data/images/context-search-indicator.svg");
 
 function showSearchContext(selectedText){
  var contextMenu = browserDocument.getElementById("contentAreaContextMenu");
 	console.log(selectedText); // todo: remove
-
-var temporaryContextMenuChild = contextMenu.children;
-
+// var time = (new Date()).getSeconds();
+// searchResultPanel.contentURL= data.url("context-search-results.html?t="+ time);
 // Add New panel
 var searchResultPanel = panels.Panel({
+	id:"takethispanel",
 width:400,
 height: 280,
 contentURL: data.url("context-search-results.html")
-// contentScript:''
+// ,onHide: panelHide 
 });
 	searchResultPanel.on("show", function() {
   searchResultPanel.port.emit("showt", selectedText);
 });
+	searchResultPanel.port.on("hideP", function(){
+searchResultPanel.hide();
+ browserDocument.appendChild(dotsIcon);
+	//console.log(browserDocument.getElementById("sidebar").length); 
+});
+
 var conextMenuPosition = contextMenu.getBoundingClientRect();
 searchResultPanel.show({
 	position: {top:conextMenuPosition.top-75, left:conextMenuPosition.left}
