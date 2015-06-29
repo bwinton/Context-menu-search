@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="24" height="24" viewBox="0 0 24 24">
+
+  <style>
+    .shadow {
+      fill: #0d131a;
+      fill-opacity: 0.05;
+    }
+
+    .context-drop {
+      fill: #1ab2ff;
+    }
+
+    .ellipsis {
+      fill: #fff;
+    }
+  </style>
+
+  <circle cx="12" cy="14" r="10" class="shadow"/>
+  <path d="M12.000,22.000 C6.477,22.000 2.000,17.523 2.000,12.000 L2.000,2.000 L12.000,2.000 C17.523,2.000 22.000,6.477 22.000,12.000 C22.000,17.523 17.523,22.000 12.000,22.000 Z" class="context-drop"/>
+  <g class="ellipsis">
+    <circle cx="7" cy="12" r="2"/>
+    <circle cx="12" cy="12" r="2"/>
+    <circle cx="17" cy="12" r="2"/>
+  </g>
+</svg>

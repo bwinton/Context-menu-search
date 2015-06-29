@@ -1,5 +1,5 @@
 body {
-    font: 12px/14px Lucida Grande;
+    font: 12px/14px Lucida Grande, Segoe UI;
     color: #333;
     margin: 0;
     line-height: 20px;
@@ -112,11 +112,15 @@ html, body, div,  a, img, ol, ul, li, table, tbody, tfoot, thead, tr, th, td, fo
 a.more {
     font-weight: bold;
     text-decoration:none;
-    color:#6380bc;
+    color:#B3B3B3;;
     position: relative;
     right: 8px;
     padding: 3px;
     cursor: pointer;
+}
+
+a.more:hover {
+    border-bottom: 1px dotted #B3B3B3;
 }
 
 .action {
