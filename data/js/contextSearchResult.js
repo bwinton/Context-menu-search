@@ -129,7 +129,7 @@ function getContent(url, callbackSuccess, callbackError) {
         processData: true,
         success: callbackSuccess,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            console.log("error");
+            console.log("Check this error:" + errorThrown);
         }
     });
 }

@@ -24,7 +24,7 @@
       <file leaf-file-name="context-search-results.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/context-search-results.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
               <folding />
             </state>
@@ -45,7 +45,7 @@
         <entry file="file://$PROJECT_DIR$/js/contextSearchResult.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
+              <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -54,8 +54,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.90097404">
-              <caret line="37" column="83" selection-start-line="37" selection-start-column="83" selection-end-line="37" selection-end-column="83" />
+            <state vertical-scroll-proportion="0.7305195">
+              <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -64,8 +64,8 @@
       <file leaf-file-name="temp" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Desktop/temp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1256" column="18" selection-start-line="1256" selection-start-column="18" selection-end-line="1256" selection-end-column="30" />
+            <state vertical-scroll-proportion="-7.5925927">
+              <caret line="2991" column="43" selection-start-line="2991" selection-start-column="30" selection-end-line="2991" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -77,11 +77,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$USER_HOME$/context-menu-test 2/index.js" />
-        <option value="$USER_HOME$/Desktop/temp" />
         <option value="$PROJECT_DIR$/css/contextSearchResult.css" />
         <option value="$PROJECT_DIR$/context-search-results.html" />
+        <option value="$USER_HOME$/Desktop/temp" />
         <option value="$PROJECT_DIR$/js/contextSearchResult.js" />
         <option value="$PROJECT_DIR$/../index.js" />
+        <option value="$PROJECT_DIR$/js/jquery.min.js" />
       </list>
     </option>
   </component>
@@ -93,8 +94,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="40" />
-    <option name="y" value="63" />
+    <option name="x" value="33" />
+    <option name="y" value="89" />
     <option name="width" value="1400" />
     <option name="height" value="761" />
   </component>
@@ -284,7 +285,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="40" y="63" width="1400" height="761" extended-state="0" />
+    <frame x="33" y="89" width="1400" height="761" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -655,14 +656,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/temp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1256" column="18" selection-start-line="1256" selection-start-column="18" selection-end-line="1256" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/context-search-results.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -671,18 +664,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Desktop/temp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5925927">
+          <caret line="2991" column="43" selection-start-line="2991" selection-start-column="30" selection-end-line="2991" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/jquery.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.025466893">
+          <caret line="3" column="13097" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <marker date="1435858113000" expanded="true" signature="-1:-1" placeholder="/*...*/" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/contextSearchResult.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
+          <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.90097404">
-          <caret line="37" column="83" selection-start-line="37" selection-start-column="83" selection-end-line="37" selection-end-column="83" />
+        <state vertical-scroll-proportion="0.7305195">
+          <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
           <folding />
         </state>
       </provider>

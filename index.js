@@ -1,7 +1,7 @@
 var self = require('sdk/self');
 var data = self.data;
 
-
+var selection = require("sdk/selection");
 var cm = require("sdk/context-menu");
 
 var panels = require("sdk/panel");
@@ -12,19 +12,47 @@ var browserDocument = browserWindow.document;
 var selectedText = "";
 
 
-
-
-cm.Item({
-    label: "Define ?",
-    // context: [cm.PredicateContext(checkSelection),cm.SelectionContext()],
-    context: cm.SelectionContext(),
-    contentScript: `self.on("context", function () { var text = window.getSelection().toString().trim(); return 'Define "'+ text + '"?'; }); self.on("click", function (node, data) { self.postMessage(window.getSelection().toString());});`,
-//contentScriptFile: self.data.url("content-script.js"),
-    accessKey: 's',
-    onMessage: function (selectedText) {
-        showSearchContext(selectedText);
+console.log(browserWindow.content.document);
+//console.log(browserDocument.commandDispatcher.focusedWindow.document);
+var doc = browserWindow.content.document;
+browserWindow.addEventListener("scroll", function (eve) {
+  var miniD =  browserDocument.getAnonymousElementByAttribute(browserDocument.querySelector("#content"), "id", "minimizerDots");
+    if(miniD)
+    {
+        var xulStackB = browserDocument.getAnonymousElementByAttribute(browserDocument.querySelector("#content"), "class", "browserStack");
+        xulStackB.removeChild(miniD);
     }
-});
+})
+//console.log(browserWindow.content.document);
+
+
+var clientXDoc = 0, clientYDoc = 0, selectedPhrase = "";
+function myListener() {
+
+
+    var bdy = browserWindow.content.document.getElementsByTagName("body");
+    //console.log(bdy.length + "assd");
+    //var sel =browserWindow.content.getSelection();
+    //console.log(sel.focusNode.offsetTop);
+    selectedPhrase = selection.text;
+    var selRange;
+    var sel = browserWindow.content.getSelection();
+    if (sel.rangeCount) {
+        selRange = sel.getRangeAt(sel.rangeCount - 1);
+        selRange.collapse();
+        var martyrElem = browserDocument.createElement("span");
+        selRange.insertNode(martyrElem);
+        var rect = martyrElem.getBoundingClientRect();
+        clientXDoc = rect.left;
+        clientYDoc = rect.top;
+        martyrElem.parentNode.removeChild(martyrElem);
+    }
+    if (selectedPhrase !== "")
+        showSearchContext(selectedPhrase, clientXDoc, clientYDoc);
+}
+
+selection.on('select', myListener);
+
 
 
 function panelHide() {
@@ -32,107 +60,109 @@ function panelHide() {
 
 }
 
+var needNewPanel = false;
 
+function showSearchContext(selectedText, x, y) {
 
-//var dotsIconDiv = browserDocument.createElement("div");
-//dotsIconDiv.style.backgroundImage = "./data/images/context-search-indicator.svg";
-//dotsIconDiv.id = "minimizerDiv";
-//dotsIconDiv.style.height ="30px";
-//dotsIconDiv.style.width = "30px";
-//dotsIconDiv.style.border = "6px solid blue";
-//
-////dotsIconDiv.style.position = "absolute";
-//dotsIconDiv.style.top= "10px";
-//dotsIconDiv.style.left="50px";
-
-
-
-// 1. Create a stack.
-
-const XUL_NS = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
-
-//iconStack.style.color="blue";
-//iconStack.style.font ="15px";
-
-// 2. Put the stack after the #browser element.
-
-
-// 3. Move the #browser element into the stack.
-// 4. Add the dotsIconDiv into the stack, and position it.
-// 5. Show and hide the dotsIconDiv.
-
-
-function showSearchContext(selectedText) {
-    var contextMenu = browserDocument.getElementById("contentAreaContextMenu");
-    console.log(selectedText); // todo: remove
-// var time = (new Date()).getSeconds();
-// searchResultPanel.contentURL= data.url("context-search-results.html?t="+ time);
 // Add New panel
-    var searchResultPanel = panels.Panel({
-        width: 400,
-        height: 280,
-        contentURL: data.url("context-search-results.html")
-// ,onHide: panelHide 
-    });
-    searchResultPanel.on("show", function () {
-        searchResultPanel.port.emit("showt", selectedText);
-    });
 
-    var conextMenuPosition = contextMenu.getBoundingClientRect();
-    searchResultPanel.show({
-        position: {top: conextMenuPosition.top - 90, left: conextMenuPosition.left}
-    });
+    var minimizerDots = browserDocument.getAnonymousElementByAttribute(browserDocument.querySelector("#content"), "id", "minimizerDots");//browserDocument.getElementById("minimizerDots");
+    console.log(minimizerDots);
+    selectedPhrase = selectedText;
+    if (minimizerDots == null) {
+        maker(selectedText, x, y);
+    }
+    else {
+        var xulStackB = browserDocument.getAnonymousElementByAttribute(browserDocument.querySelector("#content"), "class", "browserStack");
+        minimizerDots.setAttribute("top", y);
+        minimizerDots.setAttribute("left", x);
+        needNewPanel = true;
 
-    searchResultPanel.port.on("hideP", function () {
-        searchResultPanel.hide();
-var minimizerDots =  browserDocument.getAnonymousElementByAttribute(browserDocument.querySelector("#content"), "id", "minimizerDots");//browserDocument.getElementById("minimizerDots");
-        console.log(minimizerDots);
+        // xulStackB.removeChild(minimizerDots);
+        //maker(selectedText, x,y);
 
-        if(minimizerDots == null) {
-            var iconStack = browserDocument.createElement("image");
-//iconStack.setAttribute("value","Click here");
-            iconStack.setAttribute("src", self.data.url("context-search-indicator.svg"));//"./data/images/context-search-indicator.svg");
-            iconStack.setAttribute("bottom", "1");
-            iconStack.setAttribute("right", "1");
-            iconStack.setAttribute("height", "30");
-            iconStack.setAttribute("width", "30");
-            iconStack.setAttribute("id", "minimizerDots");
-
-
-            var xulBro = browserDocument.getElementById("content");
-            var xulStackBro = browserDocument.getAnonymousElementByAttribute(browserDocument.querySelector("#content"), "class", "browserStack");
-
-            xulStackBro.appendChild(iconStack);
-            console.log(xulStackBro);
-
-            iconStack.addEventListener("click",function(){
-                if(searchResultPanel.isShowing){
-                    searchResultPanel.hide();
-                }
-                else searchResultPanel.show({ position: {top: conextMenuPosition.top - 75, left: conextMenuPosition.left}});
-
-            });
-
-        }
-
-
-
-        // browserDocument.getElementsByTagName("tabbrowser")[1];
-        var browserElem = browserDocument.getElementById("browser");
-        console.log(browserElem);
-
-        //var parentBro = browserDocument.getElementById("content-deck");
-        //parentBro.appendChild(iconStack);
-        ////browserElem.parentNode.insertBefore(iconStack, browserElem.nextSibling);
-        //iconStack.appendChild(browserElem);
-        //iconStack.appendChild(dotsIconDiv);
-
-       // console.log(eParentNode.innerHTML);
-    });
+    }
 
 
 }
 
+var searchResultPanel = null, counter = 0;
+
+function maker(selectedText, x, y) {
+    var iconStack = browserDocument.createElement("image");
+//iconStack.setAttribute("value","Click here");
+    iconStack.setAttribute("src", self.data.url("context-search-indicator.svg"));//"./data/images/context-search-indicator.svg");
+    iconStack.setAttribute("top", y);
+    iconStack.setAttribute("left", x);
+    iconStack.setAttribute("height", "30");
+    iconStack.setAttribute("width", "30");
+    iconStack.setAttribute("id", "minimizerDots");
+
+
+    var xulBro = browserDocument.getElementById("content");
+    var xulStackBro = browserDocument.getAnonymousElementByAttribute(browserDocument.querySelector("#content"), "class", "browserStack");
+
+    xulStackBro.appendChild(iconStack);
+
+
+    if (searchResultPanel == null) {
+        // searchResultPanel.hide();
+
+        needNewPanel = true;
+        searchResultPanel = panels.Panel({
+            width: 400,
+            height: 280
+            //, contentURL: data.url("context-search-results.html")
+ ,onHide: panelHide
+        });
+        searchResultPanel.on("show", function () {
+            searchResultPanel.port.emit("showt", selectedPhrase);
+        });
+
+        //var conextMenuPosition = contextMenu.getBoundingClientRect();
+
+
+        searchResultPanel.port.on("hideP", function () {
+            searchResultPanel.hide();
+
+
+            //var parentBro = browserDocument.getElementById("content-deck");
+            //parentBro.appendChild(iconStack);
+            ////browserElem.parentNode.insertBefore(iconStack, browserElem.nextSibling);
+            //iconStack.appendChild(browserElem);
+            //iconStack.appendChild(dotsIconDiv);
+
+            // console.log(eParentNode.innerHTML);
+        });
+
+        //searchResultPanel.show({position: {top: conextMenuPosition.top - 75, left: conextMenuPosition.left}});
+
+    }
+    else {
+
+    }
+
+
+    iconStack.addEventListener("click", function () {
+        if (searchResultPanel.isShowing) {
+            searchResultPanel.hide();
+            needNewPanel=true;
+        }
+        else {
+            if (needNewPanel) {
+                searchResultPanel.contentURL = data.url("context-search-results.html?t=" + counter);
+
+                counter += 1;
+                needNewPanel = false;
+            }
+
+            searchResultPanel.show({position: {top: clientYDoc, left: clientXDoc}});
+
+        }
+
+    });
+
+}
 
 function dummy(text, callback) {
     callback(text);
