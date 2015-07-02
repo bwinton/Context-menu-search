@@ -1,39 +1,20 @@
-var self = require('sdk/self');
-var data = self.data;
+var self = require('sdk/self'), data = self.data, selection = require("sdk/selection"), panels = require("sdk/panel");
 
-var selection = require("sdk/selection");
-var cm = require("sdk/context-menu");
+var browserWindow = require("sdk/window/utils").getMostRecentBrowserWindow(), browserDocument = browserWindow.document, doc = browserWindow.content.document;
+//var selectedText = "";
+var clientXDoc = 0, clientYDoc = 0, selectedPhrase = "";
 
-var panels = require("sdk/panel");
-
-var browserWindow = require("sdk/window/utils").getMostRecentBrowserWindow();
-
-var browserDocument = browserWindow.document;
-var selectedText = "";
-
-
-console.log(browserWindow.content.document);
-//console.log(browserDocument.commandDispatcher.focusedWindow.document);
-var doc = browserWindow.content.document;
 browserWindow.addEventListener("scroll", function (eve) {
-  var miniD =  browserDocument.getAnonymousElementByAttribute(browserDocument.querySelector("#content"), "id", "minimizerDots");
-    if(miniD)
-    {
+    var miniD = browserDocument.getAnonymousElementByAttribute(browserDocument.querySelector("#content"), "id", "minimizerDots");
+    if (miniD) {
         var xulStackB = browserDocument.getAnonymousElementByAttribute(browserDocument.querySelector("#content"), "class", "browserStack");
+        // instead of removing position can be changed but changing top, left does not work :(
         xulStackB.removeChild(miniD);
     }
-})
-//console.log(browserWindow.content.document);
+});
 
 
-var clientXDoc = 0, clientYDoc = 0, selectedPhrase = "";
 function myListener() {
-
-
-    var bdy = browserWindow.content.document.getElementsByTagName("body");
-    //console.log(bdy.length + "assd");
-    //var sel =browserWindow.content.getSelection();
-    //console.log(sel.focusNode.offsetTop);
     selectedPhrase = selection.text;
     var selRange;
     var sel = browserWindow.content.getSelection();
@@ -47,16 +28,15 @@ function myListener() {
         clientYDoc = rect.top;
         martyrElem.parentNode.removeChild(martyrElem);
     }
-    if (selectedPhrase !== "")
+    if (selectedPhrase != "" && selectedPhrase)
         showSearchContext(selectedPhrase, clientXDoc, clientYDoc);
 }
 
 selection.on('select', myListener);
 
 
-
 function panelHide() {
-    //this.show();
+    //animation can be added here
 
 }
 
@@ -77,21 +57,14 @@ function showSearchContext(selectedText, x, y) {
         minimizerDots.setAttribute("top", y);
         minimizerDots.setAttribute("left", x);
         needNewPanel = true;
-
-        // xulStackB.removeChild(minimizerDots);
-        //maker(selectedText, x,y);
-
     }
-
-
 }
 
-var searchResultPanel = null, counter = 0;
+var searchResultPanel = null, counter = 0; // counter used for handle cache in the panel
 
 function maker(selectedText, x, y) {
     var iconStack = browserDocument.createElement("image");
-//iconStack.setAttribute("value","Click here");
-    iconStack.setAttribute("src", self.data.url("context-search-indicator.svg"));//"./data/images/context-search-indicator.svg");
+    iconStack.setAttribute("src", self.data.url("context-search-indicator.svg"));
     iconStack.setAttribute("top", y);
     iconStack.setAttribute("left", x);
     iconStack.setAttribute("height", "30");
@@ -99,54 +72,32 @@ function maker(selectedText, x, y) {
     iconStack.setAttribute("id", "minimizerDots");
 
 
-    var xulBro = browserDocument.getElementById("content");
     var xulStackBro = browserDocument.getAnonymousElementByAttribute(browserDocument.querySelector("#content"), "class", "browserStack");
-
     xulStackBro.appendChild(iconStack);
 
-
     if (searchResultPanel == null) {
-        // searchResultPanel.hide();
-
         needNewPanel = true;
         searchResultPanel = panels.Panel({
             width: 400,
             height: 280
-            //, contentURL: data.url("context-search-results.html")
- ,onHide: panelHide
+            , onHide: panelHide
         });
         searchResultPanel.on("show", function () {
             searchResultPanel.port.emit("showt", selectedPhrase);
         });
 
-        //var conextMenuPosition = contextMenu.getBoundingClientRect();
-
 
         searchResultPanel.port.on("hideP", function () {
             searchResultPanel.hide();
 
-
-            //var parentBro = browserDocument.getElementById("content-deck");
-            //parentBro.appendChild(iconStack);
-            ////browserElem.parentNode.insertBefore(iconStack, browserElem.nextSibling);
-            //iconStack.appendChild(browserElem);
-            //iconStack.appendChild(dotsIconDiv);
-
-            // console.log(eParentNode.innerHTML);
         });
-
-        //searchResultPanel.show({position: {top: conextMenuPosition.top - 75, left: conextMenuPosition.left}});
-
-    }
-    else {
-
     }
 
 
     iconStack.addEventListener("click", function () {
         if (searchResultPanel.isShowing) {
             searchResultPanel.hide();
-            needNewPanel=true;
+            needNewPanel = true;
         }
         else {
             if (needNewPanel) {
@@ -155,11 +106,8 @@ function maker(selectedText, x, y) {
                 counter += 1;
                 needNewPanel = false;
             }
-
             searchResultPanel.show({position: {top: clientYDoc, left: clientXDoc}});
-
         }
-
     });
 
 }
