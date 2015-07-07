@@ -1,0 +1,25 @@
+{
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "blockBindings": true,
+    "destructuring": true,
+    "forOf": true,
+    "generators": true,
+    "jsx": true,
+    "spread": true,
+    "templateStrings": true
+  },
+  "globals": {
+    "exports": false,
+    "require": false,
+    "window": false,
+    "$": false
+  },
+  "rules": {
+    "new-cap": [2, {
+      "capIsNew": false
+    }],
+    "quotes": [2, "single"],
+    "global-strict": [2, "always"],
+  }
+}

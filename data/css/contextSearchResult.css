@@ -138,3 +138,5 @@ a.more:hover {
     height: 185px;
 overflow: hidden;
 }
+
+p::-moz-selection { color: red}

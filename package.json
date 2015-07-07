@@ -2,7 +2,7 @@
   "title": "Context Search",
   "name": "context-menu-search",
   "version": "0.0.1",
-  "description": "",
+  "description": "Provide information about the selected text in a context.",
   "main": "index.js",
   "author": "Jatin Chhikara",
   "engines": {
