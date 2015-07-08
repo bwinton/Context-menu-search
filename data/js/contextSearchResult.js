@@ -134,7 +134,6 @@ function getContent(url, callbackSuccess, callbackError) {
         }
 
     });
-    console.log(url);
 }
 
 

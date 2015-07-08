@@ -15,7 +15,7 @@ html, body, div,  a, img, ol, ul, li, table, tbody, tfoot, thead, tr, th, td, fo
 
 #nav-tab {
 
-    line-height: 20px;
+    /*line-height: 38px;*/
 }
 
 #nav-tab li {
@@ -37,13 +37,13 @@ html, body, div,  a, img, ol, ul, li, table, tbody, tfoot, thead, tr, th, td, fo
 
     cursor: pointer;
     text-decoration: none;
-    transition: background-color 50ms ease 0s;
-    background: transparent none repeat scroll 0 0;
+    /*transition: background-color 50ms ease 0s;*/
+    /*background: transparent none repeat scroll 0 0;*/
 }
 
 #nav-tab li.active a {
 
-    box-shadow: 0 3px 0 0 #0095DD inset;
+    box-shadow: 0 4px 0 0 #0095DD inset;
 }
 
 .tab-pane {
@@ -56,11 +56,6 @@ html, body, div,  a, img, ol, ul, li, table, tbody, tfoot, thead, tr, th, td, fo
     display: block;
 }
 
-
-#nav-tab li.separator a {
-    border-left: 1px solid #C1C1C1;
-    border-right: 1px solid #C1C1C1;
-}
 
 #shop-list {
     width:99%;

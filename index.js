@@ -104,5 +104,4 @@ exports.main = () => {
             xulStackB.removeChild(miniD);
         }
     });
-    console.log('asd');
 };
