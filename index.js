@@ -22,7 +22,7 @@ function myListener() {
         clientYDoc = rect.top + rect.height;
     }
     if (selectedPhrase !== '' && selectedPhrase) {
-        showSearchContext(selectedPhrase, clientXDoc, clientYDoc);
+        showSearchContext(clientXDoc, clientYDoc);
     }
 }
 
@@ -33,14 +33,13 @@ function panelHide() {
 }
 
 var fetchFresh = false;
-function showSearchContext(selectedText, x, y) {
+function showSearchContext(x, y) {
 
 // Add New panel
     var minimizerDots = browserDocument.getAnonymousElementByAttribute(browserDocument.querySelector('#content'), 'id', 'minimizerDots');//browserDocument.getElementById('minimizerDots');
     //console.log(minimizerDots);
-    selectedPhrase = selectedText;
     if (minimizerDots == null) {
-        maker(selectedText, x, y);
+        maker(x, y);
     }
     else {
         minimizerDots.setAttribute('top', y);
@@ -50,7 +49,7 @@ function showSearchContext(selectedText, x, y) {
 }
 
 var searchResultPanel = null;
-function maker(selectedText, x, y) {
+function maker(x, y) {
     var iconStack = browserDocument.createElement('image');
     iconStack.setAttribute('src', self.data.url('context-search-indicator.svg'));
     iconStack.setAttribute('top', y);
@@ -66,12 +65,12 @@ function maker(selectedText, x, y) {
         searchResultPanel = panels.Panel({
             width: 400,
             height: 280,
-            contentURL: data.url('context-search-results.html?t=')
+            contentURL: data.url('context-search-results.html')
             , onHide: panelHide
         });
-        searchResultPanel.on('show', () => {
-            searchResultPanel.port.emit('showt', selectedPhrase);
-        });
+        //searchResultPanel.on('show', () => {
+        //    searchResultPanel.port.emit('showt', selectedPhrase);
+        //});
         searchResultPanel.port.on('hideP', () => {
             searchResultPanel.hide();
         });
@@ -84,7 +83,7 @@ function maker(selectedText, x, y) {
         }
         else {
             if (fetchFresh) {
-                searchResultPanel.port.emit('showt', selectedPhrase);
+               searchResultPanel.port.emit('showt', selectedPhrase);
                 fetchFresh = !fetchFresh;
             }
             searchResultPanel.show({position: {top: clientYDoc, left: clientXDoc}});
