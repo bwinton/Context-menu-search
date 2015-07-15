@@ -4,18 +4,17 @@ body {
     margin: 0;
     line-height: 20px;
 }
-html, body, div,  a, img, ol, ul, li, table, tbody, tfoot, thead, tr, th, td, footer, header,p
-{
+
+html, body, div, a, img, ol, ul, li, table, tbody, tfoot, thead, tr, th, td, footer, header, p {
     border: 0;
     margin: 0;
     padding: 0;
 
 }
 
-
 #nav-tab {
 
-    /*line-height: 38px;*/
+    /*line-height: 20px;*/
 }
 
 #nav-tab li {
@@ -43,7 +42,7 @@ html, body, div,  a, img, ol, ul, li, table, tbody, tfoot, thead, tr, th, td, fo
 
 #nav-tab li.active a {
 
-    box-shadow: 0 4px 0 0 #0095DD inset;
+    box-shadow: 0 3px 0 0 #0095DD inset;
 }
 
 .tab-pane {
@@ -58,9 +57,8 @@ html, body, div,  a, img, ol, ul, li, table, tbody, tfoot, thead, tr, th, td, fo
 
 
 #shop-list {
-    width:99%;
+    width: 99%;
 }
-
 
 #shop-list tbody .item-image {
     width: 30%;
@@ -68,46 +66,44 @@ html, body, div,  a, img, ol, ul, li, table, tbody, tfoot, thead, tr, th, td, fo
     text-align: center;
 }
 
-#shop-list tbody .item-image img{
+#shop-list tbody .item-image img {
     height: 50px;
     width: 50px;
 }
 
-#shop-list a
-{
+#shop-list a {
     border-bottom: 1px dotted #6380bc;
     color: #6380bc;
     cursor: pointer;
     text-decoration: none;
 }
 
-#shop-list a:hover
-{
+#shop-list a:hover {
     border-bottom-style: solid;
 }
 
-#tab-content{
+#tab-content {
     padding: 6px 20px;
-    height:204px;
+    height: 204px;
     overflow: hidden;
     position: relative;
 }
 
 /*#tab-content:after {*/
 
-    /*bottom:-20px;*/
-    /*content: "More";*/
-    /*font-weight: bold;*/
-    /*padding: 0 20px 1px 45px;*/
-    /*position: absolute;*/
-    /*right: 0;*/
+/*bottom:-20px;*/
+/*content: "More";*/
+/*font-weight: bold;*/
+/*padding: 0 20px 1px 45px;*/
+/*position: absolute;*/
+/*right: 0;*/
 
 /*}*/
 
 a.more {
     font-weight: bold;
-    text-decoration:none;
-    color:#B3B3B3;;
+    text-decoration: none;
+    color: #B3B3B3;;
     position: relative;
     right: 8px;
     padding: 3px;
@@ -119,19 +115,56 @@ a.more:hover {
 }
 
 .action {
-    text-align:right;
+    text-align: right;
 }
 
 .arrow {
-    position:absolute;
+    position: absolute;
     top: 3px;
     margin-left: 2px;
 
 }
 
-.content{
+.content {
     height: 185px;
-overflow: hidden;
+    overflow: hidden;
 }
 
-p::-moz-selection { color: red}
+.loading-data, .no-data{
+    display: none;
+}
+
+/*loading*/
+.tab-pane .main-content {
+    display: block;
+}
+
+.tab-pane.loading .loading-data{
+    display: block;
+}
+
+.tab-pane.loading .main-content, .tab-pane.loading .no-data{
+    display: none;
+}
+
+.tab-pane.no-result .no-data{
+    display:block;
+}
+
+.tab-pane.no-result .main-content, .tab-pane.no-result .loading-data{
+    display: none;
+}
+.loading-data img{
+    height: 100px;
+    width:100px
+}
+.loading-data {
+    text-align: center;
+   padding: 52px 0;
+}
+
+.suggestion-link{
+    text-decoration: none;
+    color: #0095DD;
+    cursor: pointer;
+}

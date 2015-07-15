@@ -12,10 +12,11 @@
     <!-- Tabs -->
     <div>
         <ul id="nav-tab">
-            <li class="active"><a href="#definition">Definition</a></li>
-            <li class="separator"><a href="#wiki" style="border-left: 1px solid #C1C1C1;">Wikipedia</a></li>
-
-            <li><a href="#shop" style="border-left: 1px solid #C1C1C1;">Shop</a></li>
+            <li class="active"><a href="#definition"  ondragstart="dragS(event,1);">Definition</a></li>
+            <li class=""><a href="#wiki" style="border-left: 1px solid #C1C1C1;box-sizing: border-box"  ondragstart="dragS(event,2);">Wikipedia</a>
+            </li>
+            <li><a href="#shop" id="shop-link" style="border-left: 1px solid #C1C1C1;box-sizing: border-box" draggable="true"
+                   ondragstart="dragS(event,3);" ondrop="dropS(event);">Shop</a></li>
         </ul>
 
     </div>
@@ -23,36 +24,61 @@
     <!-- Tab panes -->
     <div id="tab-content">
         <div class="tab-pane active" id="definition">
-            <div class="content">
-                <div id="selectionType" style="font-weight: bold"></div>
-                <ol id="meaningList" style="margin-left:15px;">
+            <div class="main-content">
+                <div class="content">
+                    <div id="selectionType" style="font-weight: bold"></div>
+                    <ol id="meaningList" style="margin-left:15px;">
 
-                </ol>
+                    </ol>
+                </div>
+                <div class="action"><a class="more" target="_blank">More<img class="arrow" src="images/icon-more.svg"/></a>
+                </div>
             </div>
-            <div class="action"><a class="more" target="_blank">More<img class="arrow" src="images/icon-more.svg"/></a>
+            <div class="no-data">
+                No Definition found for <span class="term" style="font-weight: bold;"></span>.
+            </div>
+            <div class="loading-data">
+
+                <img src="./images/loading-data.gif"/>
             </div>
         </div>
         <div class="tab-pane" id="wiki">
-            <div class="content"></div>
-            <div class="action"><a class="more" target="_blank">More<img class="arrow" src="images/icon-more.svg"/></a>
+            <div class="main-content">
+                <div class="content"></div>
+                <div class="action"><a class="more" target="_blank">More<img class="arrow" src="images/icon-more.svg"/></a>
+                </div>
+            </div>
+            <div class="no-data">
+                Wikipedia does not have an article on <span class="term" style="font-weight: bold;"></span>.
+            </div>
+            <div class="loading-data">
+                <img src="./images/loading-data.gif"/>
             </div>
         </div>
         <div class="tab-pane" id="shop">
-            <div class="content">
-                <table id="shop-list">
-                    <tbody></tbody>
-                    <tfoot style="display:none">
-                    <tr>
-                        <td class="item-image"><img src="" alt=""/>
+            <div class="main-content">
+                <div class="content">
+                    <table id="shop-list">
+                        <tbody></tbody>
+                        <tfoot style="display:none">
+                        <tr>
+                            <td class="item-image"><img src="" alt=""/>
 
-                            <div style="text-align:center"> $&nbsp;<span class="price"></span></div>
-                        </td>
-                        <td class="item-description"><a class="title"></a></td>
-                    </tr>
-                    </tfoot>
-                </table>
+                                <div style="text-align:center"> $&nbsp;<span class="price"></span></div>
+                            </td>
+                            <td class="item-description"><a class="title"></a></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="action"><a class="more" target="_blank">More<img class="arrow" src="images/icon-more.svg"/></a>
+                </div>
             </div>
-            <div class="action"><a class="more" target="_blank">More<img class="arrow" src="images/icon-more.svg"/></a>
+            <div class="no-data">
+                No listing on eBay with the item <span class="term" style="font-weight: bold;"></span>.
+            </div>
+            <div class="loading-data">
+                <img src="./images/loading-data.gif"/>
             </div>
         </div>
     </div>
