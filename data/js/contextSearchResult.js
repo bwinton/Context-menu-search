@@ -9,7 +9,7 @@ $(function () {
         $($this.attr('href')).addClass('active');
         //addon.port.emit('hideIconT',true);
     });
-    check('windows 10');
+    //check('windows 10');
 });
 
 function dragS(event, searchKey) {
@@ -40,8 +40,8 @@ function dropS (event){
     //$('shop-link').attr("href","#shop");
 }
 
-//addon.port.on('showt',
-function check(text) {
+addon.port.on('showt',
+function (text) {
     text = $.trim(text);
     selectedPhrase = text;
     $("#nav-tab").find("a").eq(0).click(); // select the first tab by default for each new search
@@ -209,7 +209,7 @@ function check(text) {
             }
         });
 }
-//);
+);
 
 function getContent($parent, url, callbackSuccess, callbackError) {
     $parent.removeClass('no-result').addClass('loading');
