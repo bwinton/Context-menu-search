@@ -38,8 +38,8 @@ function myListener() {
         //zoom check
         if (zoomFactor > 0 || zoomFactor < 0) {
             var zoomPercent = -((zoomFactor / defaultZoom) * 100);
-            clientXDoc = clientXDoc + (clientXDoc * zoomPercent / 100) ; // 5 to fix the precision problem
-            clientYDoc = clientYDoc + (clientYDoc * zoomPercent / 100) ;
+            clientXDoc = clientXDoc + (clientXDoc * zoomPercent / 100); // 5 to fix the precision problem
+            clientYDoc = clientYDoc + (clientYDoc * zoomPercent / 100);
         }
         showSearchContext(clientXDoc, clientYDoc);
     }
@@ -51,12 +51,17 @@ function getTextBoundingRect(input, selectionStart, selectionEnd, document) {
     var box = input.getBoundingClientRect();
     var docEl = document.documentElement;
 
+    // Styles to simulate a node in an input field
+    var cssDefaultStyles = 'white-space:pre;padding:0;margin:0;';
+    var listOfModifiers = ['direction', 'font-family', 'font-size', 'font-size-adjust', 'font-variant', 'font-weight', 'font-style', 'letter-spacing', 'line-height', 'text-align', 'text-indent', 'text-transform', 'word-wrap', 'word-spacing'];
+    var fakeClone = document.createElement('div');
+
     var topPos = box.top + docEl.scrollTop - (docEl.clientTop || 0);
     var leftPos = box.left + docEl.scrollLeft - ( docEl.scrollLeft);
     var textVal = input.value;
     var textLen = textVal.length;
     var appendPart = (start, end) => {
-        var span = document.createElement("span");
+        var span = document.createElement('span');
         span.style.cssText = cssDefaultStyles; //Force styles to prevent unexpected results
         span.textContent = textVal.substring(start, end);
         fakeClone.appendChild(span);
@@ -72,9 +77,6 @@ function getTextBoundingRect(input, selectionStart, selectionEnd, document) {
     var width = getInputCSS('width', true),
         height = getInputCSS('height', true);
 
-    // Styles to simulate a node in an input field
-    var cssDefaultStyles = "white-space:pre;padding:0;margin:0;",
-        listOfModifiers = ['direction', 'font-family', 'font-size', 'font-size-adjust', 'font-variant', 'font-weight', 'font-style', 'letter-spacing', 'line-height', 'text-align', 'text-indent', 'text-transform', 'word-wrap', 'word-spacing'];
 
     topPos += getInputCSS('padding-top', true);
     topPos += getInputCSS('border-top-width', true);
@@ -89,20 +91,23 @@ function getTextBoundingRect(input, selectionStart, selectionEnd, document) {
     // End of CSS variable checks
 
 
-    var fakeClone = document.createElement("div");
-    if (selectionStart > 0) appendPart(0, selectionStart);
+    if (selectionStart > 0) {
+        appendPart(0, selectionStart);
+    }
     var fakeRange = appendPart(selectionStart, selectionEnd);
-    if (textLen > selectionEnd) appendPart(selectionEnd, textLen);
+    if (textLen > selectionEnd) {
+        appendPart(selectionEnd, textLen);
+    }
 
     // Styles to inherit the font styles of the element
     fakeClone.style.cssText = cssDefaultStyles;
 
     // Styles to position the text node at the desired position
-    fakeClone.style.position = "absolute";
-    fakeClone.style.top = topPos + "px";
-    fakeClone.style.left = leftPos + "px";
-    fakeClone.style.width = width + "px";
-    fakeClone.style.height = height + "px";
+    fakeClone.style.position = 'absolute';
+    fakeClone.style.top = topPos + 'px';
+    fakeClone.style.left = leftPos + 'px';
+    fakeClone.style.width = width + 'px';
+    fakeClone.style.height = height + 'px';
     document.body.appendChild(fakeClone);
     var returnValue = fakeRange.getBoundingClientRect();
 
